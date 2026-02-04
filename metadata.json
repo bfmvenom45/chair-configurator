@@ -1,0 +1,5 @@
+{
+  "name": "Chair 3D Product Configurator",
+  "description": "A high-end 3D product configurator for luxury furniture, featuring real-time material swapping, color customization, and cinematic camera transitions using React Three Fiber and GSAP.",
+  "requestFramePermissions": []
+}

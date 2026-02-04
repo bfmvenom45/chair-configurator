@@ -10,33 +10,99 @@ Title: Gaming Chair
 
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
+import { MaterialType } from './types'
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/gaming_chair-transformed.glb')
+export function Model({ 
+  colors = { seat: '#1a1a1a', backrest: '#1a1a1a', base: '#333333' }, 
+  materialType = MaterialType.LEATHER, 
+  ...props 
+}) {
+  const { nodes, materials } = useGLTF('/gaming_chair.glb')
+  
+  // Realistic material properties based on type
+  const getMaterialProps = (color) => {
+    const baseProps = {
+      color: color,
+      transparent: false,
+      opacity: 1,
+      side: THREE.DoubleSide,
+      envMapIntensity: 1.2,
+    }
+    
+    switch (materialType) {
+      case MaterialType.LEATHER:
+        return {
+          ...baseProps,
+          roughness: 0.35,
+          metalness: 0.0,
+          envMapIntensity: 0.8,
+          // Leather has subtle reflection
+        }
+      case MaterialType.FABRIC:
+        return {
+          ...baseProps,
+          roughness: 0.95,
+          metalness: 0,
+          envMapIntensity: 0.3,
+          // Fabric is very matte
+        }
+      case MaterialType.VELVET:
+        return {
+          ...baseProps,
+          roughness: 0.7,
+          metalness: 0.0,
+          envMapIntensity: 0.5,
+          // Velvet has soft sheen
+        }
+      default:
+        return {
+          ...baseProps,
+          roughness: 0.35,
+          metalness: 0.0,
+        }
+    }
+  }
+  
+  // Base/frame - realistic chrome/metal
+  const baseProps = {
+    roughness: 0.15,
+    metalness: 0.95,
+    color: colors.base,
+    transparent: false,
+    opacity: 1,
+    side: THREE.DoubleSide,
+    envMapIntensity: 2.0,
+  }
+  
   return (
     <group {...props} dispose={null}>
-      {/* Подушка сидіння */}
+      {/* Seat */}
       <mesh 
-        name="Cushion"
-        geometry={nodes.gaming_chair_progress_uvpolySurface238_gaming_chair_progress_uvblinn6_0.geometry} 
-        material={materials.gaming_chair_progress_uvblinn6} 
-      />
-      
-      {/* Спинка крісла */}
+        geometry={nodes.gaming_chair_progress_uvpolySurface238_gaming_chair_progress_uvblinn6_0.geometry}
+        castShadow
+        receiveShadow
+      >
+        <meshStandardMaterial {...getMaterialProps(colors.seat)} />
+      </mesh>
+      {/* Backrest */}
       <mesh 
-        name="Backrest"
-        geometry={nodes.gaming_chair_progress_uvpolySurface238_gaming_chair_progress_uvblinn4_0.geometry} 
-        material={materials.gaming_chair_progress_uvblinn4} 
-      />
-      
-      {/* База та колеса */}
+        geometry={nodes.gaming_chair_progress_uvpolySurface238_gaming_chair_progress_uvblinn4_0.geometry}
+        castShadow
+        receiveShadow
+      >
+        <meshStandardMaterial {...getMaterialProps(colors.backrest)} />
+      </mesh>
+      {/* Base/Frame */}
       <mesh 
-        name="Base"
-        geometry={nodes.gaming_chair_progress_uvpolySurface238_blinn1_0.geometry} 
-        material={materials.blinn1} 
-      />
+        geometry={nodes.gaming_chair_progress_uvpolySurface238_blinn1_0.geometry}
+        castShadow
+        receiveShadow
+      >
+        <meshStandardMaterial {...baseProps} />
+      </mesh>
     </group>
   )
 }
 
-useGLTF.preload('/gaming_chair-transformed.glb')
+useGLTF.preload('/gaming_chair.glb')
