@@ -1,20 +1,64 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🪑 Gaming Chair 3D Configurator
 
-# Run and deploy your AI Studio app
+Interactive 3D gaming chair configurator built with React, TypeScript, and Three.js.
 
-This contains everything you need to run your app locally.
+![Gaming Chair Configurator](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Three.js](https://img.shields.io/badge/Three.js-r158-green)
 
-View your app in AI Studio: https://ai.studio/apps/drive/12CilGJ5EZmB2VPmhGrgeXPp3wY2jyxJ8
+## ✨ Features
 
-## Run Locally
+- **3D Visualization** — Real-time 3D rendering with Three.js
+- **Color Customization** — Change colors for seat, backrest, and base independently
+- **Material Options** — Switch between leather, fabric, and velvet
+- **5 Color Presets** — Midnight, Arctic, Forest, Royal, Desert
+- **Animated Transitions** — Smooth GSAP animations when changing presets
+- **Intro Animation** — Epic entrance animation on page load
+- **Auto-rotate Views** — Automatic camera rotation when idle
+- **Multiple Camera Views** — Front, side, top, and detail views
+- **Interactive Controls** — Orbit controls for manual rotation
 
-**Prerequisites:**  Node.js
+## 🚀 Getting Started
 
+**Prerequisites:** Node.js 18+
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🛠 Tech Stack
+
+- **React 18** — UI framework
+- **TypeScript** — Type safety
+- **Three.js** — 3D rendering
+- **@react-three/fiber** — React renderer for Three.js
+- **@react-three/drei** — Useful helpers for R3F
+- **GSAP** — Animations
+- **Tailwind CSS** — Styling
+- **Vite** — Build tool
+
+## 📁 Project Structure
+
+```
+├── App.tsx                 # Main app with state management
+├── Gaming_chair.jsx        # 3D model component
+├── types.ts                # TypeScript interfaces & presets
+├── components/
+│   ├── Scene.tsx           # 3D scene with lighting & animations
+│   ├── ChairModel.tsx      # Chair model wrapper
+│   └── ConfiguratorUI.tsx  # UI controls panel
+└── public/
+    └── gaming_chair.glb    # 3D model file
+```
+
+## 📝 License
+
+MIT
+
+---
+
+Made with ❤️ by [dev.bushko](https://github.com/bfmvenom45)
