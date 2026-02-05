@@ -250,11 +250,11 @@ const Scene: React.FC<SceneProps> = ({ config, transitionDirection, isIntro, onI
           {/* Clean contact shadow */}
           <ContactShadows
             position={[0, -0.59, 0]}
-            opacity={0.4}
-            scale={10}
-            blur={2.5}
-            far={1}
-            resolution={512}
+            opacity={0.6}
+            scale={12}
+            blur={2}
+            far={3}
+            resolution={1024}
             color="#000000"
           />
 
